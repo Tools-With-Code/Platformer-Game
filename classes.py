@@ -19,6 +19,7 @@ class Player:
         pygame.draw.rect(display, self.color, (self.x, self.y, self.WIDTH, self.HEIGHT))
 
     def Move(self, keys):
+        self.rect = pygame.Rect(self.x, self.y, self.WIDTH, self.HEIGHT)
         if not self.jump:
             if keys[pygame.K_LEFT] or keys[pygame.K_a]:
                 self.x -= self.VEL
@@ -40,3 +41,20 @@ class Player:
             else:
                 self.jump = False
                 self.JUMP_HEIGHT = 7
+
+class Coin:
+    RADIUS = 15
+    def __init__(self, x, y):
+        self.x = x
+        self.y = y
+        self.color = (255, 255, 0)
+        self.taken = False
+
+    def Draw(self, display):
+        if not self.taken:
+            pygame.draw.circle(display, self.color,  (self.x, self.y), self.RADIUS)
+
+    def CollideWithPlayer(self, player):
+        if player.rect.collidepoint(self.x, self.y) and not self.taken:
+            self.taken = True
+            return True
