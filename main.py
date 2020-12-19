@@ -13,6 +13,8 @@ def Main():
     FPS = 60
     clock = pygame.time.Clock()
     player = Player(WIDTH // 2, HEIGHT // 2)
+    coin = Coin(WIDTH // 2, HEIGHT // 2)
+    score = 0
     while True:
         clock.tick(FPS)
         events = pygame.event.get()
@@ -21,6 +23,10 @@ def Main():
         DISPLAY.fill(BLACK)
         player.Draw(DISPLAY)
         player.Move(keys)
+        coin.Draw(DISPLAY)
+        if coin.CollideWithPlayer(player):
+            score += 1
+            print(score)
 
         for event in events:
             if event.type == pygame.QUIT:
