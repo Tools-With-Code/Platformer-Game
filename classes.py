@@ -35,7 +35,7 @@ class Player:
                 neg = 1
                 if self.JUMP_HEIGHT < 0:
                     neg = -1
-                self.y -= self.JUMP_HEIGHT * neg
+                self.y -= (self.JUMP_HEIGHT ** 2) * neg
                 self.JUMP_HEIGHT -= 1
             else:
                 self.jump = False
